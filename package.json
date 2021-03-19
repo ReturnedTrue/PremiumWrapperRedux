@@ -1,15 +1,20 @@
 {
   "name": "@rbxts/premium-wrapper",
-  "version": "0.0.3",
-  "description": "Under development, do not use",
+  "version": "1.0.0",
+  "description": "Lighweight API for integrating premium benefits into your Roblox game",
   "main": "src/init.lua",
-  "keywords": [],
+  "keywords": ["roblox", "roblox-ts", "utility", "module", "helper"],
   "author": "ReturnedTrue",
-  "license": "ISC",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ReturnedTrue/PremiumWrapperRedux"
+  },
   "types": "src/typings/index.d.ts",
+  "readme": "README.md",
   "files": [
     "src/*",
     "package-lock.json",
