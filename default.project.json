@@ -1,0 +1,12 @@
+{
+  "name": "PremiumWrapperRedux",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "PremiumWrapper": {
+        "$path": "src"         
+      }
+    }
+  }
+}

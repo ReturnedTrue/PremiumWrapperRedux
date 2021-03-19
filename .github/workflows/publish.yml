@@ -1,0 +1,50 @@
+name: Publisher
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Publish PremiumWrapper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Retrieve node and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'v12.16.3'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm install
+          npm publish
+
+      - name: Install foreman
+        uses: Roblox/setup-foreman@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build into rbxlx
+        run: |
+          rojo build -o place.rbxlx
+
+      - name: Publish to roblox
+        env:
+          REMODEL_AUTH: ${{ secrets.ROBLOX_TOKEN }}
+        run: |
+          remodel run publish.lua
+
+      - name: Release to GitHub
+        uses: svenstaro/upload-release-action@2.2.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: PremiumWrapper.rbxmx
+          asset_name: PremiumWrapper
+          tag: ${{ github.ref }}
